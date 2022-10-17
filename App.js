@@ -1,15 +1,14 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from 'react';
+import {View, Text} from 'react-native';
 
-import MainScreen from './src/screens/MainScreen'
+import {createStackNavigator} from '@react-navigation/stack';
+
+import MainScreen from './src/screens/MainScreen';
+import PassManager from './src/screens/passmanager/PassManager';
+import AuthStackNavigation from './src/navigation/AuthStackNavigation';
 const App = () => {
-  return (
-    <>
-      <MainScreen />
-    </>
-    
-  
-  )
-}
+  return <AuthStackNavigation />;
+  // return <Text>Hello</Text>;
+};
 
-export default App
+export default App;

@@ -1,6 +1,6 @@
 import React from "react";
 import { View,Text,Image, SafeAreaView,StyleSheet, ImageBackground,StatusBar} from "react-native";
-import TabNavigation from "../navigation/TabNavigation";
+import AuthTabNavigation from "../navigation/AuthTabNavigation";
 import LinearGradient from "react-native-linear-gradient";
 
 const MainScreen=()=>{
@@ -14,7 +14,7 @@ const MainScreen=()=>{
             
             </View>
             <View style={{flex:1,marginTop:20}}>
-                <TabNavigation/>
+                <AuthTabNavigation/>
             </View>
  
         </SafeAreaView>

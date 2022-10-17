@@ -3,7 +3,7 @@ import React from 'react';
 import Button from '../../component/Button';
 import Icon from 'react-native-vector-icons/Entypo'
 
-const SignUp = () => {
+const SignUp = ({navigation}) => {
   return (
     <View style={styles.container}>
       <TextInput placeholder="Mobile Number" style={styles.textInput} />
@@ -12,7 +12,7 @@ const SignUp = () => {
         <TextInput placeholder="Re-Enter 4 digit MPin" />
         <Icon name="eye-with-line" size={20} />
       </View>
-      <Button />
+      <Button navigation={navigation}/>
     </View>
   );
 };

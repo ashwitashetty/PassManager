@@ -7,9 +7,9 @@ import {
 } from 'react-native';
 import React from 'react';
 
-const Button = () => {
+const Button = ({navigation}) => {
   return (
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate('PassManager')}>
       <Text style={styles.text}>SIGN IN</Text>
     </TouchableOpacity>
   );
