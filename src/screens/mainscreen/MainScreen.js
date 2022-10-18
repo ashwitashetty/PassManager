@@ -1,7 +1,8 @@
 import React from "react";
 import { View,Text,Image, SafeAreaView,StyleSheet, ImageBackground,StatusBar} from "react-native";
-import AuthTabNavigation from "../navigation/AuthTabNavigation";
+import AuthTabNavigation from "../../navigation/AuthTabNavigation";
 import LinearGradient from "react-native-linear-gradient";
+
 
 const MainScreen=()=>{
     return(
@@ -10,7 +11,7 @@ const MainScreen=()=>{
              <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "white" />
             <View style={{alignItems:"center"}}>
             
-            <Image source={require("/Volumes/Development/PassManager/src/assets/logo1.png")} style={styles.image} ></Image>
+            <Image source={require("/Volumes/Development/PassManager/src/assets/images/logo1.png")} style={styles.image} ></Image>
             
             </View>
             <View style={{flex:1,marginTop:20}}>

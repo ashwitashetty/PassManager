@@ -7,15 +7,17 @@ import {
 } from 'react-native';
 import React from 'react';
 
-const Button = ({navigation}) => {
+
+
+const PrimaryButton = ({onPress}) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate('PassManager')}>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
       <Text style={styles.text}>SIGN IN</Text>
     </TouchableOpacity>
   );
 };
 
-export default Button;
+export default PrimaryButton;
 
 const styles = StyleSheet.create({
   button: {

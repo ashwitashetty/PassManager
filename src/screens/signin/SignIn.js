@@ -1,22 +1,26 @@
 import {StyleSheet, Text, TextInput, View, Image} from 'react-native';
 import React from 'react';
-import Button from '../../component/Button';
+import PrimaryButton from '../../component/PrimaryButton';
 
 const SignIn = ({navigation}) => {
+  const handleSignIn = () => {
+    alert(`Congrats!!! Success \n Signin to access the vault`);
+    navigation.navigate('PassManager');
+  };
   return (
     <View style={styles.container}>
       <TextInput placeholder="Mobile Number" style={styles.textInput} />
       <View style={styles.password}>
         <TextInput placeholder="MPin" />
         <Image
-          source={require('/Volumes/Development/PassManager/src/assets/eye_on.png')}
+          source={require('/Volumes/Development/PassManager/src/assets/images/eye_on.png')}
           style={styles.eyeIcon}
         />
       </View>
       <Text style={styles.forgotPassword}>Forgot your password?</Text>
-      <Button navigation={navigation} />
+      <PrimaryButton onPress={() => handleSignIn()} />
       <Image
-        source={require('/Volumes/Development/PassManager/src/assets/fingerprinticon.png')}
+        source={require('/Volumes/Development/PassManager/src/assets/images/fingerprinticon.png')}
         style={styles.fingerPrintIcon}
       />
       <View style={styles.textBottom}>

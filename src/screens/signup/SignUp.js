@@ -1,7 +1,8 @@
 import {StyleSheet, Text, View, TextInput, Image} from 'react-native';
 import React from 'react';
-import Button from '../../component/Button';
+
 import Icon from 'react-native-vector-icons/Entypo'
+import PrimaryButton from '../../component/PrimaryButton';
 
 const SignUp = ({navigation}) => {
   return (
@@ -12,7 +13,7 @@ const SignUp = ({navigation}) => {
         <TextInput placeholder="Re-Enter 4 digit MPin" />
         <Icon name="eye-with-line" size={20} />
       </View>
-      <Button navigation={navigation}/>
+      <PrimaryButton navigation={navigation}/>
     </View>
   );
 };
