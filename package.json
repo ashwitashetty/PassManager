@@ -9,12 +9,13 @@
     "test": "jest",
     "lint": "eslint .",
     "generate": "npx react-native generate-bootsplash ./src/assets/original_icon.png --background-color=#0E85FF   --logo-width=100 --assets-path=./src/assets --flavor=main"
-
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.17.10",
     "@react-navigation/material-top-tabs": "^6.3.0",
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/native-stack": "^6.9.1",
+    "formik": "^2.2.9",
     "react": "18.1.0",
     "react-native": "0.70.3",
     "react-native-bootsplash": "^4.3.2",
@@ -25,7 +26,8 @@
     "react-native-splash-screen": "^3.3.0",
     "react-native-tab-view": "^3.3.0",
     "react-native-vector-icons": "^9.2.0",
-    "react-navigation": "^4.4.4"
+    "react-navigation": "^4.4.4",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

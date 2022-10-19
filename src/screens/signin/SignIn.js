@@ -1,24 +1,104 @@
-import {StyleSheet, Text, TextInput, View, Image} from 'react-native';
+import {StyleSheet, Text, TextInput, View, Image,Pressable} from 'react-native';
 import React from 'react';
 import PrimaryButton from '../../component/PrimaryButton';
 
+import {Formik} from 'formik';
+import * as yup from 'yup';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
+
+
 const SignIn = ({navigation}) => {
-  const handleSignIn = () => {
-    alert(`Congrats!!! Success \n Signin to access the vault`);
-    navigation.navigate('PassManager');
-  };
+  const signinValidationSchema = yup.object().shape({
+    mobileno: yup
+      .string()
+      .matches(/(\d){10}\b/, 'Enter a valid mobile number')
+      .required('Phone number is required'),
+    mpin: yup
+      .string()
+      .matches(/(\d){4}\b/, 'mPin must have a number')
+      .max(4, ({max}) => `mPin must be${max} of characters`)
+      .required('mPin is required'),
+  });
+// const handleSignIn = () => {
+  //   alert(`Congrats!!! Success \n Signin to access the vault`);
+  //   navigation.navigate('PassManager');
+  // };
   return (
     <View style={styles.container}>
-      <TextInput placeholder="Mobile Number" style={styles.textInput} />
+      <Formik
+          validationSchema={signinValidationSchema}
+          initialValues={{mobileno: '', mpin: ''}}
+          onSubmit={async values => {
+            console.log(values);
+            try {
+              const jsonValue = await AsyncStorage.getItem('values.mobileno');
+              if (jsonValue != null) {
+                parseValue = JSON.parse(jsonValue);
+
+                if (
+                  values.mobileno === parseValue.mobileno &&
+                  values.mpin === parseValue.mpin
+                ) {
+                  alert('Successfully Logged In');
+                  navigation.navigate('PassManager');
+                } else {
+                  Alert('Enter Correct Mobile Number and MPin');
+                }
+              }
+            } catch (err) {
+              console.log(err);
+            }
+          }}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+             errors,
+            isValid,
+          }) => (
+            <>
+      <TextInput
+                name="mobileno"
+                placeholder="Mobile Number"
+                placeholderTextColor={'grey'}
+                style={styles.textInput}
+                onChangeText={handleChange('mobileno')}
+                onBlur={handleBlur('mobileno')}
+                value={values.mobileno}
+                keyboardType="number-pad"
+              />
+              {errors.mobileno && (
+                <Text style={{fontSize: 10, color: 'red'}}>
+                  {errors.mobileno}
+                </Text>
+              )}
       <View style={styles.password}>
-        <TextInput placeholder="MPin" />
+      <TextInput
+                name="mpin"
+                placeholder="MPin"
+                onChangeText={handleChange('mpin')}
+                placeholderTextColor={'grey'}
+                onBlur={handleBlur('mpin')}
+                value={values.mpin}
+                keyboardType="number-pad"
+                secureTextEntry
+              />
         <Image
           source={require('/Volumes/Development/PassManager/src/assets/images/eye_on.png')}
           style={styles.eyeIcon}
         />
       </View>
+      {errors.mpin && (
+                <Text style={{fontSize: 10, color: 'red'}}>{errors.mpin}</Text>
+              )}
+              <Pressable style={{}}>
       <Text style={styles.forgotPassword}>Forgot your password?</Text>
-      <PrimaryButton onPress={() => handleSignIn()} />
+      </Pressable>
+      <PrimaryButton onPress={handleSubmit}
+                  disabled={!isValid} />
       <Image
         source={require('/Volumes/Development/PassManager/src/assets/images/fingerprinticon.png')}
         style={styles.fingerPrintIcon}
@@ -27,6 +107,9 @@ const SignIn = ({navigation}) => {
         <Text style={styles.textBottom1}>OK</Text>
         <Text style={styles.textBottom2}> USE YOUR FINGERPRINT TO LOGIN</Text>
       </View>
+      </>
+          )}
+        </Formik>
     </View>
   );
 };
@@ -44,9 +127,10 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(208,208,208,0.5)',
     backgroundColor: '#FFFFFF',
     paddingHorizontal: 10,
-    margin: 30,
+    marginTop: 30,
     borderRadius: 4,
     fontWeight: '600',
+    marginBottom:5,
   },
   eyeIcon: {
     height: 15,
@@ -65,6 +149,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderColor: 'rgba(208,208,208,0.5)',
     fontWeight: '600',
+    marginTop:30,
+    marginBottom:5,
   },
   forgotPassword: {
     height: 17,

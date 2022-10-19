@@ -1,22 +1,28 @@
-import React, { useState } from 'react';
-import {View, Text, StyleSheet, SafeAreaView, Image,StatusBar, TouchableOpacity,} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  Image,
+  StatusBar,
+  TouchableOpacity,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Entypo';
 import ListView from '../listview/ListView';
 import SearchField from '../../component/SearchField';
 
-
 const PassManager = ({navigation}) => {
+  const [clicked, setClicked] = useState(false);
 
-const [clicked,setClicked]=useState(false);
-  
-  
   return (
     <SafeAreaView style={styles.container}>
-        <StatusBar
+      <StatusBar
         barStyle="dark-content"
         hidden={false}
-        backgroundColor="#2192FF" />
+        backgroundColor="#2192FF"
+      />
       <View style={styles.header}>
         <View style={styles.headerMenu}>
           <Image
@@ -29,15 +35,17 @@ const [clicked,setClicked]=useState(false);
         </View>
         <View style={styles.headerIcons}>
           <TouchableOpacity onPress={() => setClicked(!clicked)}>
-          <Image
-            source={require('/Volumes/Development/PassManager/src/assets/images/search.png')}
-            style={styles.contentIcon}
-          />
+            <Image
+              source={require('/Volumes/Development/PassManager/src/assets/images/search.png')}
+              style={styles.contentIcon}
+            />
           </TouchableOpacity>
+          <TouchableOpacity>
           <Image
             source={require('/Volumes/Development/PassManager/src/assets/images/sync_icn.png')}
             style={styles.contentIcon}
           />
+          </TouchableOpacity>
           <Image
             source={require('/Volumes/Development/PassManager/src/assets/images/profile.png')}
             style={styles.contentIcon}
@@ -46,32 +54,37 @@ const [clicked,setClicked]=useState(false);
       </View>
 
       <View style={styles.heading}>
-        {clicked?(<SearchField/>):(
+        {clicked ? (
+          <SearchField />
+        ) : (
+          <>
+            <View>
+              <Text style={styles.sites}>Sites</Text>
+              <View style={styles.borderBottom} />
+            </View>
 
-        <>
-        <View>
-        <Text style={styles.sites}>Sites</Text>
-        <View style={styles.borderBottom}/>
-        </View>
-        
-        <View style={styles.headerMenu}>
-          <Text style={styles.socialMedia}>Social Media</Text>
-          <View style={styles.oval}>
-            <Text style={styles.number}>07</Text>
-          </View>
-          <Icon name="chevron-down" size={20} color="#0E85FF" />
-        </View>
-      
-      </>
-      )}
+            <View style={styles.headerMenu}>
+              <Text style={styles.socialMedia}>Social Media</Text>
+              <View style={styles.oval}>
+                <Text style={styles.number}>07</Text>
+              </View>
+              <Icon name="chevron-down" size={20} color="#0E85FF" />
+            </View>
+          </>
+        )}
       </View>
       <View style={styles.listView}>
-        <ListView navigation={navigation}/>
+        <ListView navigation={navigation} />
       </View>
-      <TouchableOpacity title="add" style={styles.button} onPress={()=>navigation.navigate('Add Site')}>
-      <Image source={require('/Volumes/Development/PassManager/src/assets/images/add_btn.png')} style={styles.addButton}/>
-    </TouchableOpacity>
-      
+      <TouchableOpacity
+        title="add"
+        style={styles.button}
+        onPress={() => navigation.navigate('Add Site')}>
+        <Image
+          source={require('/Volumes/Development/PassManager/src/assets/images/add_btn.png')}
+          style={styles.addButton}
+        />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -128,9 +141,9 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     letterSpacing: 0,
     lineHeight: 33,
-    borderBottomWidth: 2,
-    borderRadius: 2,
-    borderBottomColor:"#FFA222"
+    // borderBottomWidth: 2,
+    // borderRadius: 2,
+    // borderBottomColor: '#FFA222',
   },
   socialMedia: {
     height: 27,
@@ -158,22 +171,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: 4,
   },
-  listView:{
-    flex:1,
+  listView: {
+    flex: 1,
   },
-  button:{
-    position:'absolute',
-    width:50,
-    height:50,
-    alignItems:'center',
-    justifyContent:'center',
-    right:15,
-    bottom:80,
+  button: {
+    position: 'absolute',
+    width: 50,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    right: 15,
+    bottom: 80,
   },
-  addButton:{
-    resizeMode:'contain',
-    width:48,
-    height:48
+  addButton: {
+    resizeMode: 'contain',
+    width: 48,
+    height: 48,
   },
   borderBottom: {
     borderBottomWidth: 4,
