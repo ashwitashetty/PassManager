@@ -1,15 +1,7 @@
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-
-
-const PrimaryButton = ({navigation,onPress}) => {
+const PrimaryButton = ({navigation, onPress}) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <Text style={styles.text}>SIGN IN</Text>

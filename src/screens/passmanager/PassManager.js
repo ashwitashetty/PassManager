@@ -8,7 +8,7 @@ import {
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+
 import Icon from 'react-native-vector-icons/Entypo';
 import ListView from '../listview/ListView';
 import SearchField from '../../component/SearchField';
@@ -41,10 +41,10 @@ const PassManager = ({navigation}) => {
             />
           </TouchableOpacity>
           <TouchableOpacity>
-          <Image
-            source={require('/Volumes/Development/PassManager/src/assets/images/sync_icn.png')}
-            style={styles.contentIcon}
-          />
+            <Image
+              source={require('/Volumes/Development/PassManager/src/assets/images/sync_icn.png')}
+              style={styles.contentIcon}
+            />
           </TouchableOpacity>
           <Image
             source={require('/Volumes/Development/PassManager/src/assets/images/profile.png')}
@@ -92,7 +92,6 @@ const PassManager = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#FAFAFA',
   },
   header: {
     width: '100%',
@@ -127,11 +126,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   heading: {
-    // height: 37,
     flexDirection: 'row',
     margin: 20,
     justifyContent: 'space-between',
-    // marginTop:20
   },
   sites: {
     height: 33,
@@ -141,9 +138,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     letterSpacing: 0,
     lineHeight: 33,
-    // borderBottomWidth: 2,
-    // borderRadius: 2,
-    // borderBottomColor: '#FFA222',
   },
   socialMedia: {
     height: 27,
@@ -197,28 +191,6 @@ const styles = StyleSheet.create({
     marginLeft: 1,
     marginVertical: -3,
   },
-
-  // styling for flatlist
-  // item: {
-  //   backgroundColor: '#FFFFFF',
-  //   padding: 20,
-  //   margin:20,
-  //   marginVertical: 8,
-  //   marginHorizontal: 16,
-  //   shadowColor: 'grey',
-  //   shadowOffset: {
-  //     width: 4,
-  //     height: 4,
-  //   },
-  //   shadowRadius: 3,
-  //   shadowOpacity: 0.1,
-  //   borderRadius:10,
-  //   height:104,
-  //   width:320,
-  // },
-  // title: {
-  //   fontSize: 32,
-  // },
 });
 
 export default PassManager;

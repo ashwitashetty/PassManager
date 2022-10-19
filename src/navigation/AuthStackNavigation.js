@@ -1,14 +1,16 @@
-import {View, Text,Button} from 'react-native';
+import {Button} from 'react-native';
 import React from 'react';
+
 import RNBootSplash from 'react-native-bootsplash';
 import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import PassManager from '../screens/passmanager/PassManager';
 import MainScreen from '../screens/mainscreen/MainScreen';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AddSite from '../screens/addsite/AddSite';
 import SiteDetails from '../screens/sitedetails/SiteDetails';
 import EditScreen from '../screens/editscreen/EditScreen';
+
 const Stack = createNativeStackNavigator();
 
 const AuthStackNavigation = () => {
@@ -33,6 +35,7 @@ const AuthStackNavigation = () => {
         <Stack.Screen
           name="Edit"
           component={EditScreen}
+       
           options={{
             headerStyle: {
               backgroundColor: '#0E85FF',
@@ -40,7 +43,6 @@ const AuthStackNavigation = () => {
             },
             headerTintColor: 'white',
           }}
-        
         />
         <Stack.Screen
           name="Add Site"
@@ -56,13 +58,19 @@ const AuthStackNavigation = () => {
         <Stack.Screen
           name="Site Details"
           component={SiteDetails}
-          options={({navigation})=>({
-            headerStyle: {backgroundColor: '#0E85FF'},
-            headerTintColor: 'white',
-            headerRight: () => (<Button onPress={()=>navigation.navigate('Edit')} title="Edit" color="#FFFFFF" />),
-          })}
+          options={{headerShown: false}}
+          // options={({navigation}) => ({
+          //   headerStyle: {backgroundColor: '#0E85FF'},
+          //   headerTintColor: 'white',
+          //   headerRight: () => (
+          //     <Button
+          //       onPress={() => navigation.navigate('Edit')}
+          //       title="Edit"
+          //       color="#FFFFFF"
+          //     />
+          //   ),
+          // })}
         />
-
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { View,Text,Image, SafeAreaView,StyleSheet, ImageBackground,StatusBar} from "react-native";
+import { View,Image, SafeAreaView,StyleSheet, ImageBackground,StatusBar} from "react-native";
 import AuthTabNavigation from "../../navigation/AuthTabNavigation";
 import LinearGradient from "react-native-linear-gradient";
 
