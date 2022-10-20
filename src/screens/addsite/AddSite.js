@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import {useState} from 'react';
+import Toast from "react-native-simple-toast"
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from 'react-redux';
@@ -38,9 +39,7 @@ const AddSite = ({navigation}) => {
           dispatch(add(values));
           console.log(values);
           try {
-            const jsonValue = JSON.stringify(values);
-            await AsyncStorage.setItem(values.url, jsonValue);
-
+         
             Toast.show('Saved Successfully');
             navigation.navigate('PassManager');
           } catch (err) {
