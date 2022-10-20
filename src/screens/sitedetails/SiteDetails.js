@@ -86,7 +86,8 @@ const SiteDetails = ({navigation}) => {
               editable={false}
               selectTextOnFocus={false}
                 value={route.params.item.password}
-                secureTextEntry />
+                // secureTextEntry 
+                />
             <Icon name="eye" size={25} />
           </View>
         </View>

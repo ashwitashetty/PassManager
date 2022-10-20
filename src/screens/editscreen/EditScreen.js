@@ -76,7 +76,7 @@ const EditScreen = ({navigation}) => {
                       style={styles.inputText}
                       selectTextOnFocus={false}
                       value={route.params.data.password}
-                      secureTextEntry
+                      // secureTextEntry
                     />
                     <Icon name="eye" size={25} />
                   </View>
@@ -90,7 +90,6 @@ const EditScreen = ({navigation}) => {
                   />
                 </View>
               </View>
-              {/* <CustomButton title={"Update"} /> */}
               <View>
                 <TouchableOpacity
                   style={styles.rectangle}
@@ -186,6 +185,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#0E85FF',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop:10,
   },
 });
 export default EditScreen;

@@ -59,17 +59,6 @@ const AuthStackNavigation = () => {
           name="Site Details"
           component={SiteDetails}
           options={{headerShown: false}}
-          // options={({navigation}) => ({
-          //   headerStyle: {backgroundColor: '#0E85FF'},
-          //   headerTintColor: 'white',
-          //   headerRight: () => (
-          //     <Button
-          //       onPress={() => navigation.navigate('Edit')}
-          //       title="Edit"
-          //       color="#FFFFFF"
-          //     />
-          //   ),
-          // })}
         />
       </Stack.Navigator>
     </NavigationContainer>
