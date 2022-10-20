@@ -1,10 +1,11 @@
 import React from 'react';
 import {TextInput, View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-const SearchField = () => {
+
+const SearchField = ({onChangeText}) => {
   return (
     <View style={styles.SectionStyle}>
-      <TextInput placeholder="Type Keywords to search"></TextInput>
+      <TextInput placeholder="Type Keywords to search" onChangeText={onChangeText} />
       <Icon name="arrowright" size={25} color="#0E85FF" />
     </View>
   );

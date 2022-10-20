@@ -8,24 +8,37 @@ import {
 } from 'react-native';
 import React from 'react';
 import {useState} from 'react';
-import Toast from "react-native-simple-toast"
+import Toast from 'react-native-simple-toast';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useDispatch} from 'react-redux';
+import {useDispatch,useSelector} from 'react-redux';
 
 import Icon from 'react-native-vector-icons/Entypo';
 import CustomButton from '../../component/CustomButton';
 import {add} from '../redux/ManagerSlice';
 import {Formik} from 'formik';
+import * as yup from 'yup'
+
 
 const AddSite = ({navigation}) => {
   const src = require('/Volumes/Development/PassManager/src/assets/images/facebook.png');
   const dispatch = useDispatch();
+  const data = useSelector(state => state.password.value);
   const [inputValue, setInputValue] = useState('');
+
+  const signupValidationSchema = yup.object().shape({
+    url: yup.string().required('url is required'),
+    sitename: yup.string().required('sitename is required'),
+    folder: yup.string().required('folder is required'),
+    username: yup.string().required('username is required'),
+    password: yup.string().required('password is required'),
+    notes: yup.string().required(),
+  });
 
   return (
     <SafeAreaView style={styles.container}>
       <Formik
+       validationSchema={signupValidationSchema}
         initialValues={{
           url: '',
           sitename: '',
@@ -36,10 +49,19 @@ const AddSite = ({navigation}) => {
           src: src,
         }}
         onSubmit={async values => {
-          dispatch(add(values));
+          const obj ={
+            id: data.length + 1,
+            url: values.url,
+            sitename: values.sitename,
+            folder: values.folder,
+            username: values.username,
+            password: values.password,
+            notes: values.notes,
+            src:src,
+          }
+          dispatch(add(obj));
           console.log(values);
           try {
-         
             Toast.show('Saved Successfully');
             navigation.navigate('PassManager');
           } catch (err) {
@@ -105,7 +127,6 @@ const AddSite = ({navigation}) => {
                       onChangeText={handleChange('password')}
                       onBlur={handleBlur('password')}
                       value={values.password}
-                      secureTextEntry
                     />
                     <Icon name="eye" size={20} />
                   </View>

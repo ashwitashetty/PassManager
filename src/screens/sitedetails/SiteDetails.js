@@ -1,5 +1,5 @@
 import {useRoute} from '@react-navigation/native';
-import React from 'react';
+import React,{useState} from 'react';
 import { Formik } from 'formik';
 import ICON from 'react-native-vector-icons/AntDesign';
 import { useDispatch } from 'react-redux';
@@ -12,6 +12,10 @@ const SiteDetails = ({navigation}) => {
   const route = useRoute();
   const data=route.params.item;
   const dispatch = useDispatch();
+
+  const [secureTextEntry,setSecureTextEntry]=useState(true);
+  const [icon,setIcon]=useState('eye-with-line');
+
   return (
     <SafeAreaView style={styles.container}>
        <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#0E85FF" />
@@ -86,9 +90,11 @@ const SiteDetails = ({navigation}) => {
               editable={false}
               selectTextOnFocus={false}
                 value={route.params.item.password}
-                // secureTextEntry 
+                secureTextEntry={secureTextEntry}
                 />
-            <Icon name="eye" size={25} />
+           <Icon name={icon} size={25} onPress={()=>{
+                  setSecureTextEntry(!secureTextEntry);
+                  secureTextEntry ? setIcon("eye-with-line"):setIcon("eye")}} />
           </View>
         </View>
         <View style={styles.container3}>

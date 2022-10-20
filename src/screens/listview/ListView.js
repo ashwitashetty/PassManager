@@ -15,6 +15,8 @@ const ListView = ({navigation}) => {
             onPress={() => navigation.navigate('Site Details', {item})}>
             <View style={styles.imageName}>
               <Image source={item.src} style={styles.image} />
+
+
               <View style={styles.component}>
                 <Text style={styles.componentName}>{item.sitename}</Text>
                 <View style={styles.copySection}>
@@ -53,15 +55,15 @@ const styles = StyleSheet.create({
     borderRadius: 12.6,
   },
   component: {
-    paddingHorizontal: 15,
+    paddingRight:30,
   },
   componentName: {
     height: 24,
     width: 83,
     color: '#0E95FF',
-    fontSize: 18,
-    fontWeight: '600',
-    lineHeight: 24,
+    fontSize: 17,
+    paddingTop:5,
+    fontWeight: '500',
   },
   componentCopy: {
     color: '#0E85FF',

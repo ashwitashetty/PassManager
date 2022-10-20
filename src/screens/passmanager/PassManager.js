@@ -11,10 +11,15 @@ import {
 
 import Icon from 'react-native-vector-icons/Entypo';
 import ListView from '../listview/ListView';
-import SearchField from '../../component/SearchField';
+import SearchField from "../../component/SearchField"
+
+import { filter } from '../redux/ManagerSlice';
+import { useDispatch } from 'react-redux';
 
 const PassManager = ({navigation}) => {
   const [clicked, setClicked] = useState(false);
+
+  const dispatch=useDispatch();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -55,7 +60,7 @@ const PassManager = ({navigation}) => {
 
       <View style={styles.heading}>
         {clicked ? (
-          <SearchField />
+          <SearchField onChangeText={text => dispatch(filter(text))} />
         ) : (
           <>
             <View>

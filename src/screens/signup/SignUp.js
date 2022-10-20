@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View, TextInput, Image} from 'react-native';
-import React from 'react';
+import React,{useState} from 'react';
 
 import Icon from 'react-native-vector-icons/Entypo';
 import PrimaryButton from '../../component/PrimaryButton';
@@ -25,6 +25,10 @@ const SignUp = ({navigation}) => {
       .oneOf([yup.ref('mpin')], 'mPin do not match')
       .required('Confirm mPin is required'),
   });
+
+
+  const [secureTextEntry,setSecureTextEntry]=useState(true);
+  const [icon,setIcon]=useState('eye');
 
   return (
     <View style={styles.container}>
@@ -53,7 +57,7 @@ const SignUp = ({navigation}) => {
           <>
             <TextInput
               name="mobileno"
-              placeholder="   Enter Mobile Number"
+              placeholder="Enter Mobile Number"
               keyboardType="numeric"
               placeholderTextColor="grey"
               onChangeText={handleChange('mobileno')}
@@ -68,7 +72,7 @@ const SignUp = ({navigation}) => {
             )}
             <TextInput
               name="mpin"
-              placeholder="   Enter 4 digit Mpin"
+              placeholder="Enter 4 digit Mpin"
               onChangeText={handleChange('mpin')}
               placeholderTextColor={'grey'}
               onBlur={handleBlur('mpin')}
@@ -84,15 +88,18 @@ const SignUp = ({navigation}) => {
             <View style={styles.password}>
               <TextInput
                 name="confirmmpin"
-                placeholder="   Re-Enter 4 digit Mpin"
+                placeholder="Re-Enter 4 digit Mpin"
                 onChangeText={handleChange('conformmpin')}
                 placeholderTextColor={'grey'}
                 onBlur={handleBlur('conformmpin')}
                 value={values.conformmpin}
-                secureTextEntry
+                secureTextEntry={secureTextEntry}
                 keyboardType="numeric"
               />
-              <Icon name="eye-with-line" size={20} />
+              <Icon name={icon} size={25} onPress={()=>{
+                setSecureTextEntry(!secureTextEntry) 
+                secureTextEntry ? setIcon("eye-with-line"):setIcon("eye")
+              }} />
             </View>
             {errors.conformmpin && (
               <Text style={{fontSize: 10, color: 'red'}}>

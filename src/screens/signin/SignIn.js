@@ -7,9 +7,10 @@ import {
   Pressable,
   ToastAndroid,
 } from 'react-native';
-import React from 'react';
+import React,{useState} from 'react';
 import PrimaryButton from '../../component/PrimaryButton';
 import Toast from "react-native-simple-toast"
+import Icon from 'react-native-vector-icons/Entypo';
 
 import {Formik} from 'formik';
 import * as yup from 'yup';
@@ -27,6 +28,10 @@ const SignIn = ({navigation}) => {
       .max(4, ({max}) => `mPin must be${max} of characters`)
       .required('mPin is required'),
   });
+
+
+const [secureTextEntry,setSecureTextEntry]=useState(true);
+const [icon,setIcon]=useState('eye');
   return (
     <View style={styles.container}>
       <Formik
@@ -86,12 +91,11 @@ const SignIn = ({navigation}) => {
                 onBlur={handleBlur('mpin')}
                 value={values.mpin}
                 keyboardType="number-pad"
-                secureTextEntry
+                secureTextEntry={secureTextEntry}
               />
-              <Image
-                source={require('/Volumes/Development/PassManager/src/assets/images/eye_on.png')}
-                style={styles.eyeIcon}
-              />
+               <Icon name={icon} size={25} onPress={()=>{
+                  setSecureTextEntry(!secureTextEntry);
+                  secureTextEntry ? setIcon("eye-with-line"):setIcon("eye")}} />
             </View>
             {errors.mpin && (
               <Text style={{fontSize: 10, color: 'red'}}>{errors.mpin}</Text>

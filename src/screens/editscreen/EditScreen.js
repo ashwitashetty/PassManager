@@ -1,6 +1,8 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {useRoute} from '@react-navigation/native';
 import {Formik} from 'formik';
+import { useDispatch } from 'react-redux';
+import { edit } from '../redux/ManagerSlice';
 
 import {
   View,
@@ -16,20 +18,38 @@ import Icon from 'react-native-vector-icons/Entypo';
 
 const EditScreen = ({navigation}) => {
   const route = useRoute();
-  const data = route.params.item;
+
+  const dispatch = useDispatch();
+  const siteid = route.params.data.id;
+
+  const [secureTextEntry,setSecureTextEntry]=useState(true);
+  const [icon,setIcon]=useState('eye-with-line');
 
   return (
     <SafeAreaView style={styles.container}>
       <Formik
-        initialValues={{
-          url: '',
-          sitename: '',
-          folder: '',
-          username: '',
-          password: '',
-          notes: '',
+         initialValues={{
+          url: route.params.data.url,
+          sitename: route.params.data.sitename,
+          folder: route.params.data.folder,
+          username: route.params.data.username,
+          password: route.params.data.password,
+          notes: route.params.data.notes,
+        }}
+        onSubmit={async values => {
+          const obj = {
+            id: siteid,
+            url: values.url,
+            sitename: values.sitename,
+            folder: values.folder,
+            username: values.username,
+            password: values.password,
+            notes: values.notes,
+          };
+          dispatch(edit(obj));
+          navigation.navigate('PassManager');
         }}>
-        {() => (
+        {({handleChange, handleBlur, handleSubmit, values}) => (
           <>
             <ScrollView>
               <View style={styles.container2}>
@@ -38,7 +58,9 @@ const EditScreen = ({navigation}) => {
                   <TextInput
                     style={styles.inputBox}
                     selectTextOnFocus={false}
-                    value={route.params.data.url}
+                    onChangeText={handleChange('url')}
+                    onBlur={handleBlur('url')}
+                    value={values.url}
                   />
                 </View>
                 <View style={styles.container3}>
@@ -46,7 +68,9 @@ const EditScreen = ({navigation}) => {
                   <TextInput
                     style={styles.inputBox}
                     selectTextOnFocus={false}
-                    value={route.params.data.sitename}
+                    onChangeText={handleChange('sitename')}
+                    onBlur={handleBlur('sitename')}
+                    value={values.sitename}
                   />
                 </View>
                 <View style={styles.container3}>
@@ -55,7 +79,9 @@ const EditScreen = ({navigation}) => {
                     <TextInput
                       style={styles.inputText}
                       selectTextOnFocus={false}
-                      value={route.params.data.folder}
+                      onChangeText={handleChange('folder')}
+                      onBlur={handleBlur('folder')}
+                      value={values.folder}
                     />
 
                     <Icon name="chevron-down" size={25} color="#0E95FF" />
@@ -66,7 +92,9 @@ const EditScreen = ({navigation}) => {
                   <TextInput
                     style={styles.inputBox}
                     selectTextOnFocus={false}
-                    value={route.params.data.username}
+                    onChangeText={handleChange('username')}
+                    onBlur={handleBlur('username')}
+                    value={values.username}
                   />
                 </View>
                 <View style={styles.container3}>
@@ -75,10 +103,14 @@ const EditScreen = ({navigation}) => {
                     <TextInput
                       style={styles.inputText}
                       selectTextOnFocus={false}
-                      value={route.params.data.password}
-                      // secureTextEntry
+                      onChangeText={handleChange('password')}
+                      onBlur={handleBlur('password')}
+                      value={values.password}
+                      secureTextEntry={secureTextEntry}
                     />
-                    <Icon name="eye" size={25} />
+                   <Icon name={icon} size={25} onPress={()=>{
+                  setSecureTextEntry(!secureTextEntry);
+                  secureTextEntry ? setIcon("eye-with-line"):setIcon("eye")}} />
                   </View>
                 </View>
                 <View style={styles.container3}>
@@ -86,14 +118,16 @@ const EditScreen = ({navigation}) => {
                   <TextInput
                     style={styles.noteBox}
                     selectTextOnFocus={false}
-                    value={route.params.data.notes}
+                    onChangeText={handleChange('notes')}
+                onBlur={handleBlur('notes')}
+                value={values.notes}
                   />
                 </View>
               </View>
               <View>
                 <TouchableOpacity
                   style={styles.rectangle}
-                  onPress={() => navigation.navigate('PassManager')}>
+                  onPress={handleSubmit}>
                   <Text style={styles.update}>Update</Text>
                 </TouchableOpacity>
               </View>
