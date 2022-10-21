@@ -6,6 +6,7 @@ import {
   Image,
   Pressable,
   ToastAndroid,
+  ScrollView,
 } from 'react-native';
 import React,{useState} from 'react';
 import PrimaryButton from '../../component/PrimaryButton';
@@ -33,6 +34,7 @@ const SignIn = ({navigation}) => {
 const [secureTextEntry,setSecureTextEntry]=useState(true);
 const [icon,setIcon]=useState('eye');
   return (
+    <ScrollView>
     <View style={styles.container}>
       <Formik
         validationSchema={signinValidationSchema}
@@ -119,6 +121,7 @@ const [icon,setIcon]=useState('eye');
         )}
       </Formik>
     </View>
+    </ScrollView>
   );
 };
 
@@ -131,7 +134,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 54,
-    width: 300,
+    width: "90%",
     borderColor: 'rgba(208,208,208,0.5)',
     backgroundColor: '#FFFFFF',
     paddingHorizontal: 10,
@@ -139,6 +142,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     fontWeight: '600',
     marginBottom: 5,
+    marginHorizontal:10,
   },
   eyeIcon: {
     height: 15,
@@ -148,7 +152,7 @@ const styles = StyleSheet.create({
   },
   password: {
     height: 54,
-    width: 300,
+    width: "90%",
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -162,19 +166,19 @@ const styles = StyleSheet.create({
   },
   forgotPassword: {
     height: 17,
-    wdth: 143,
+    width: "100%",
     color: '#FFFFFF',
     fontSize: 14,
     fontWeight: '600',
     letterSpacing: 0,
     lineHeight: 17,
     marginTop: 30,
-    marginRight: 145,
+    marginRight:"50%",
   },
   fingerPrintIcon: {
     height: 54,
     width: 52.31,
-    marginTop: 150,
+    marginTop: 130,
   },
   textBottom: {
     flexDirection: 'row',

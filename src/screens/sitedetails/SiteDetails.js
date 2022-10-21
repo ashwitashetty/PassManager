@@ -107,8 +107,7 @@ const SiteDetails = ({navigation}) => {
             style={styles.noteBox}
             editable={false}
             selectTextOnFocus={false}
-           
-                    value={route.params.item.notes} />
+           value={route.params.item.notes} />
         </View>
       </View>
       </ScrollView>
@@ -126,7 +125,7 @@ const styles = StyleSheet.create({
   container2: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    alignItems: 'center',
+    // alignItems: 'center',
     padding: 10,
   },
   container3: {
@@ -138,7 +137,7 @@ const styles = StyleSheet.create({
   },
   text: {
     heigth: 24,
-    width: 200,
+    width: '100%',
     color: '#949CA5',
     fontSize: 18,
     letterSpacing: 0,
@@ -147,11 +146,11 @@ const styles = StyleSheet.create({
   },
   inputBox: {
     height: 41,
-    width: 321,
+    width: "100%",
     borderWidth: 1,
     borderColor: '#D7D7D7',
     borderRadius: 4,
-    backgroundColor: '#FSF7FB',
+    backgroundColor: '#F5F7FB',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -159,16 +158,17 @@ const styles = StyleSheet.create({
   },
   inputText: {
     height: 41,
-    width: 280,
+    width: "92%",
     lineHeight: 24,
-    backgroundColor: '#F5F7fB',
+    // backgroundColor: '#F5F7fB',
   },
   noteBox: {
     height: 81,
-    width: 321,
+    width: "100%",
     borderWidth: 1,
     borderColor: '#D7D7D7',
     borderRadius: 4,
+    backgroundColor: '#F5F7FB',
   
   },
   buttonStyle: {
@@ -201,7 +201,8 @@ const styles = StyleSheet.create({
   description: {
     backgroundColor: '#F5F7FB',
     height: 61,
-    width: 321,
+    // width: 321,
+    alignItems:"stretch",
     borderRadius: 4,
     marginStart: 30,
     borderColor: '#D7D7D7',

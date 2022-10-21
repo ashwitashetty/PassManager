@@ -71,10 +71,10 @@ const AddSite = ({navigation}) => {
             console.log(err);
           }
         }}>
-        {({handleChange, handleBlur, handleSubmit, values}) => (
+        {({handleChange, handleBlur, handleSubmit, values,handleReset}) => (
           <>
             <ScrollView>
-              <View style={styles.content}>
+              <View >
                 <View>
                   <Text style={styles.text}>URL</Text>
                   <TextInput
@@ -122,7 +122,7 @@ const AddSite = ({navigation}) => {
                   />
                 </View>
 
-                <View style={styles.password}>
+                <View>
                   <Text style={styles.text}>Site Password</Text>
                   <View style={styles.rectangle}>
                     <TextInput
@@ -149,11 +149,11 @@ const AddSite = ({navigation}) => {
                   />
                 </View>
               </View>
-            </ScrollView>
             <View style={styles.button}>
-              <CustomButton title={'Reset'} />
+              <CustomButton title={'Reset'} onPress={handleReset}/>
               <CustomButton title={'Save'} onPress={handleSubmit} />
             </View>
+            </ScrollView>
           </>
         )}
       </Formik>
@@ -167,12 +167,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  content: {
-    marginHorizontal: 30,
-  },
+  
   rectangle: {
     height: 41,
-    width: 321,
+    width: "100%",
     borderColor: '#D7D7D7',
     borderWidth: 1,
     borderRadius: 4,
@@ -183,7 +181,7 @@ const styles = StyleSheet.create({
   },
   text: {
     height: 24,
-    width: 200,
+    width: "100%",
     color: '#949CA5',
     fontSize: 18,
     letterSpacing: 0,
@@ -193,7 +191,7 @@ const styles = StyleSheet.create({
   },
   rectangle1: {
     height: 61,
-    width: 321,
+    width: "100%",
     borderColor: '#D7D7D7',
     borderWidth: 1,
     borderRadius: 4,
@@ -201,9 +199,11 @@ const styles = StyleSheet.create({
   },
   button: {
     flexDirection: 'row',
+    // justifyContent:"space-around"
+    
   },
   inputText: {
     height: 41,
-    width: 280,
+    width: "92.9%",
   },
 });

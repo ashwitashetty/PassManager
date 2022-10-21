@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, TextInput, Image} from 'react-native';
+import {StyleSheet, Text, View, TextInput, Image, ScrollView} from 'react-native';
 import React,{useState} from 'react';
 
 import Icon from 'react-native-vector-icons/Entypo';
@@ -31,6 +31,7 @@ const SignUp = ({navigation}) => {
   const [icon,setIcon]=useState('eye');
 
   return (
+    <ScrollView>
     <View style={styles.container}>
       <Formik
         validationSchema={signupValidationSchema}
@@ -116,6 +117,7 @@ const SignUp = ({navigation}) => {
         )}
       </Formik>
     </View>
+    </ScrollView>
   );
 };
 
@@ -129,7 +131,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 54,
-    width: 300,
+    width: "90%",
     borderColor: 'rgba(208,208,208,0.5)',
     backgroundColor: '#FFFFFF',
     paddingHorizontal: 10,
@@ -146,7 +148,7 @@ const styles = StyleSheet.create({
   },
   password: {
     height: 54,
-    width: 300,
+    width: "90%",
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

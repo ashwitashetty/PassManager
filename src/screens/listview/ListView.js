@@ -1,35 +1,42 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, Pressable, FlatList, TouchableOpacity,Alert} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Pressable,
+  FlatList,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {useSelector,useDispatch} from 'react-redux';
-import { deleteSite } from '../redux/ManagerSlice';
+import {useSelector, useDispatch} from 'react-redux';
+import {deleteSite} from '../redux/ManagerSlice';
 
 const ListView = ({navigation}) => {
   const value = useSelector(state => state.password.value);
- const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   return (
-  
     <View>
       <FlatList
         data={value}
         renderItem={({item}) => (
           <View>
             <Pressable
-            onLongPress={() => {
-              Alert.alert('Confirm', 'Do you want to delete Site', [
-                {
-                  text: 'ok',
-                  onPress: () => {
-                    dispatch(deleteSite({id: item.id}));
+              onLongPress={() => {
+                Alert.alert('Confirm', 'Do you want to delete Site', [
+                  {
+                    text: 'ok',
+                    onPress: () => {
+                      dispatch(deleteSite({id: item.id}));
+                    },
                   },
-                },
-                {
-                  text: 'cancel',
-                },
-              ]);
-            }
-          }
+                  {
+                    text: 'cancel',
+                  },
+                ]);
+              }}
               onPress={() => navigation.navigate('Site Details', {item})}>
               <View style={styles.itemContainer}>
                 <View>
@@ -54,7 +61,6 @@ const ListView = ({navigation}) => {
         )}
       />
     </View>
-    
   );
 };
 
@@ -72,16 +78,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderRadius: 5,
     height: 115,
-    width: 365,
-    marginStart: 12,
-
+    width: "100%",
+    // marginStart: 12,
     shadowColor: 'grey',
     shadowOffset: {
       width: 1,
       height: 1,
     },
     shadowRadius: 3,
-    shadowOpacity: 0.4,
+    shadowOpacity: 0.5,
     padding: 10,
     elevation: 5,
     margin: 10,
@@ -98,7 +103,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 10,
     backgroundColor: '#FAFAFA',
-    width: 363,
+    // width: 363,
     marginStart: -10,
   },
   socialText: {

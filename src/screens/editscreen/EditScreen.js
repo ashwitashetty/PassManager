@@ -3,6 +3,7 @@ import {useRoute} from '@react-navigation/native';
 import {Formik} from 'formik';
 import {useDispatch} from 'react-redux';
 import {edit} from '../redux/ManagerSlice';
+import DropdownField from '../../component/DropdownField';
 
 import {
   View,
@@ -24,6 +25,14 @@ const EditScreen = ({navigation}) => {
 
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [icon, setIcon] = useState('eye-with-line');
+
+  const [selected, setSelected] = useState(' ');
+
+  const dropdownData = [
+    {key: 'Social Media', value: 'Social Media'},
+    {key: 'Shopping Sites', value: 'Shopping Sites'},
+    {key: 'bank', value: 'bank'},
+  ];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -73,20 +82,16 @@ const EditScreen = ({navigation}) => {
                     value={values.sitename}
                   />
                 </View>
-                <View style={styles.container3}>
-                  <Text style={styles.text}>Sector/Folder</Text>
-                  <View style={styles.inputBox}>
-                    <TextInput
-                      style={styles.inputText}
-                      selectTextOnFocus={false}
-                      onChangeText={handleChange('folder')}
-                      onBlur={handleBlur('folder')}
-                      value={values.folder}
-                    />
 
-                    <Icon name="chevron-down" size={25} color="#0E95FF" />
-                  </View>
-                </View>
+                <DropdownField
+                  text="folder"
+                  name="folder"
+                  onChangeText={handleChange('folder')}
+                  onBlur={handleBlur('folder')}
+                  data={dropdownData}
+                  value={selected}
+                  setSelected={setSelected}
+                />
                 <View style={styles.container3}>
                   <Text style={styles.text}>User Name</Text>
                   <TextInput
@@ -131,7 +136,7 @@ const EditScreen = ({navigation}) => {
                   />
                 </View>
               </View>
-              <View>
+              <View style={{alignItems: 'center'}}>
                 <TouchableOpacity
                   style={styles.rectangle}
                   onPress={handleSubmit}>
@@ -152,7 +157,7 @@ const styles = StyleSheet.create({
   container2: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    alignItems: 'center',
+    // alignItems: 'center',
     padding: 10,
   },
   container3: {
@@ -164,7 +169,7 @@ const styles = StyleSheet.create({
   },
   text: {
     heigth: 24,
-    width: 200,
+    width: '100%',
     color: '#949CA5',
     fontSize: 18,
     letterSpacing: 0,
@@ -174,7 +179,7 @@ const styles = StyleSheet.create({
   },
   inputBox: {
     height: 41,
-    width: 321,
+    width: '100%',
     borderWidth: 1,
     borderColor: '#D7D7D7',
     borderRadius: 4,
@@ -186,13 +191,15 @@ const styles = StyleSheet.create({
   },
   inputText: {
     height: 41,
-    width: 280,
+    width: '92%',
     lineHeight: 24,
     backgroundColor: '#FSF7FB',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   noteBox: {
     height: 81,
-    width: 321,
+    width: '100%',
     borderWidth: 1,
     borderColor: '#D7D7D7',
     borderRadius: 4,
@@ -213,7 +220,7 @@ const styles = StyleSheet.create({
   },
   update: {
     height: 28,
-    width: 65,
+    width: '100%',
     color: '#FFFFFF',
     fontSize: 20,
     fontWeight: '500',
@@ -222,10 +229,10 @@ const styles = StyleSheet.create({
   },
   rectangle: {
     height: 55,
-    width: 400,
+    width: '100%',
     backgroundColor: '#0E85FF',
     justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
     marginTop: 10,
   },
 });

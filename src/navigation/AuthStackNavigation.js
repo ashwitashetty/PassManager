@@ -52,6 +52,7 @@ const AuthStackNavigation = () => {
             headerStyle: {
               backgroundColor: '#0E85FF',
               color: 'white',
+              height:100,
             },
             headerTintColor: 'white',
           }}

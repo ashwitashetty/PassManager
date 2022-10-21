@@ -110,11 +110,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     shadowColor: 'grey',
     shadowOffset: {
-      width: 0,
+      width: 1,
       height: 3,
     },
     shadowRadius: 5,
-    shadowOpacity: 1.0,
+    shadowOpacity: 2,
+    // elevation:5,
     padding: 10,
   },
   headerMenu: {
@@ -174,6 +175,11 @@ const styles = StyleSheet.create({
   },
   listView: {
     flex: 1,
+    // marginLeft:-40,
+    // marginBottom:30,
+    // borderWidth:1,
+    // margin:10
+    marginHorizontal:20
   },
   button: {
     position: 'absolute',
