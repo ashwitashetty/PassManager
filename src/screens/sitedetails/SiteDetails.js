@@ -20,6 +20,7 @@ const SiteDetails = ({navigation}) => {
     <SafeAreaView style={styles.container}>
        <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#0E85FF" />
        <View style={styles.topbar}>
+        <View style={styles.topbar1}>
       <ICON
           name="arrowleft"
           size={25}
@@ -29,7 +30,10 @@ const SiteDetails = ({navigation}) => {
           }}
         />
         <Text style={styles.sitename}>Site Details</Text>
+        </View>
+        <View>
         <Pressable style={styles.button} onPress={()=>navigation.navigate('Edit',{data})}><Text style={styles.textheader}>Edit</Text></Pressable>
+        </View>
       </View>
          <Formik
         initialValues={{url: '',
@@ -157,6 +161,7 @@ const styles = StyleSheet.create({
     height: 41,
     width: 280,
     lineHeight: 24,
+    backgroundColor: '#F5F7fB',
   },
   noteBox: {
     height: 81,
@@ -164,7 +169,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#D7D7D7',
     borderRadius: 4,
-    backgroundColor: '#FSF7FB',
+  
   },
   buttonStyle: {
     height: 55,
@@ -191,7 +196,7 @@ const styles = StyleSheet.create({
     fontSize:20,
     color:"white",
     fontWeight:"bold",
-    marginStart:100,
+    marginStart:30,
   },
   description: {
     backgroundColor: '#F5F7FB',
@@ -210,7 +215,7 @@ const styles = StyleSheet.create({
      
   },
   button:{
-    marginHorizontal:100,
+    marginHorizontal:20,
     
   },
   textheader:{
@@ -222,7 +227,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#0E85FF',
     flexDirection: 'row',
     height: 60,
-    alignItems:"center"
+    alignItems:"center",
+    justifyContent:"space-between",
+  },
+  topbar1:{
+    flexDirection:'row',
+    justifyContent:'space-between'
   },
 });
 export default SiteDetails;

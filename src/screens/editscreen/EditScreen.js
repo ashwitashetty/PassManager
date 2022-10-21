@@ -146,7 +146,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
-    // justifyContent:"center",
     padding: 10,
   },
   container3: {
@@ -172,7 +171,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#D7D7D7',
     borderRadius: 4,
-    backgroundColor: '#FSF7FB',
+     backgroundColor: '#F5F7FB',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -182,6 +181,7 @@ const styles = StyleSheet.create({
     height: 41,
     width: 280,
     lineHeight: 24,
+    backgroundColor: '#FSF7FB',
   },
   noteBox: {
     height: 81,
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#D7D7D7',
     borderRadius: 4,
-    backgroundColor: '#FSF7FB',
+    backgroundColor: '#F5F7FB',
   },
   buttonStyle: {
     height: 55,

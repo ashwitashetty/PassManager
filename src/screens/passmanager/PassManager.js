@@ -179,8 +179,8 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    right: 15,
-    bottom: 80,
+    right: 20,
+    bottom: 95,
   },
   addButton: {
     resizeMode: 'contain',
