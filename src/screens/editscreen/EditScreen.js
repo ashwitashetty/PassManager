@@ -1,8 +1,8 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {useRoute} from '@react-navigation/native';
 import {Formik} from 'formik';
-import { useDispatch } from 'react-redux';
-import { edit } from '../redux/ManagerSlice';
+import {useDispatch} from 'react-redux';
+import {edit} from '../redux/ManagerSlice';
 
 import {
   View,
@@ -22,13 +22,13 @@ const EditScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const siteid = route.params.data.id;
 
-  const [secureTextEntry,setSecureTextEntry]=useState(true);
-  const [icon,setIcon]=useState('eye-with-line');
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
+  const [icon, setIcon] = useState('eye-with-line');
 
   return (
     <SafeAreaView style={styles.container}>
       <Formik
-         initialValues={{
+        initialValues={{
           url: route.params.data.url,
           sitename: route.params.data.sitename,
           folder: route.params.data.folder,
@@ -108,9 +108,16 @@ const EditScreen = ({navigation}) => {
                       value={values.password}
                       secureTextEntry={secureTextEntry}
                     />
-                   <Icon name={icon} size={25} onPress={()=>{
-                  setSecureTextEntry(!secureTextEntry);
-                  secureTextEntry ? setIcon("eye-with-line"):setIcon("eye")}} />
+                    <Icon
+                      name={icon}
+                      size={25}
+                      onPress={() => {
+                        setSecureTextEntry(!secureTextEntry);
+                        secureTextEntry
+                          ? setIcon('eye-with-line')
+                          : setIcon('eye');
+                      }}
+                    />
                   </View>
                 </View>
                 <View style={styles.container3}>
@@ -119,8 +126,8 @@ const EditScreen = ({navigation}) => {
                     style={styles.noteBox}
                     selectTextOnFocus={false}
                     onChangeText={handleChange('notes')}
-                onBlur={handleBlur('notes')}
-                value={values.notes}
+                    onBlur={handleBlur('notes')}
+                    value={values.notes}
                   />
                 </View>
               </View>
@@ -171,7 +178,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#D7D7D7',
     borderRadius: 4,
-     backgroundColor: '#F5F7FB',
+    backgroundColor: '#F5F7FB',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -219,7 +226,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#0E85FF',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop:10,
+    marginTop: 10,
   },
 });
 export default EditScreen;

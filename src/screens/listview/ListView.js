@@ -1,17 +1,35 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, Pressable, FlatList} from 'react-native';
+import {View, Text, StyleSheet, Image, Pressable, FlatList, TouchableOpacity,Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {useSelector} from 'react-redux';
+import {useSelector,useDispatch} from 'react-redux';
+import { deleteSite } from '../redux/ManagerSlice';
 
 const ListView = ({navigation}) => {
   const value = useSelector(state => state.password.value);
+ const dispatch=useDispatch();
+
   return (
+  
     <View>
       <FlatList
         data={value}
         renderItem={({item}) => (
           <View>
             <Pressable
+            onLongPress={() => {
+              Alert.alert('Confirm', 'Do you want to delete Site', [
+                {
+                  text: 'ok',
+                  onPress: () => {
+                    dispatch(deleteSite({id: item.id}));
+                  },
+                },
+                {
+                  text: 'cancel',
+                },
+              ]);
+            }
+          }
               onPress={() => navigation.navigate('Site Details', {item})}>
               <View style={styles.itemContainer}>
                 <View>
@@ -36,6 +54,7 @@ const ListView = ({navigation}) => {
         )}
       />
     </View>
+    
   );
 };
 

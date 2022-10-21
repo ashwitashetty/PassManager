@@ -13,8 +13,10 @@ import Icon from 'react-native-vector-icons/Entypo';
 import ListView from '../listview/ListView';
 import SearchField from "../../component/SearchField"
 
+
 import { filter } from '../redux/ManagerSlice';
 import { useDispatch } from 'react-redux';
+
 
 const PassManager = ({navigation}) => {
   const [clicked, setClicked] = useState(false);

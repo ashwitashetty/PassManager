@@ -42,6 +42,7 @@ const AuthStackNavigation = () => {
               color: 'white',
             },
             headerTintColor: 'white',
+          
           }}
         />
         <Stack.Screen

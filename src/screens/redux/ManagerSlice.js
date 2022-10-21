@@ -70,9 +70,12 @@ export const ManagerSlice = createSlice({
         site.sitename.toLowerCase().includes(action.payload.toLowerCase()),
       );
     },
+    deleteSite :(state,action) => {
+      state.value = state.value.filter(value => value.id !== action.payload.id);
+    }
   },
 });
 
-export const {add, edit, filter} = ManagerSlice.actions;
+export const {add, edit, filter,deleteSite} = ManagerSlice.actions;
 
 export default ManagerSlice.reducer;
