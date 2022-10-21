@@ -9,11 +9,11 @@ import {
 import React from 'react';
 import {useState} from 'react';
 import Toast from 'react-native-simple-toast';
+import Icon from 'react-native-vector-icons/Entypo';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch,useSelector} from 'react-redux';
 
-import Icon from 'react-native-vector-icons/Entypo';
 import CustomButton from '../../component/CustomButton';
 import {add} from '../redux/ManagerSlice';
 import {Formik} from 'formik';
@@ -21,10 +21,13 @@ import * as yup from 'yup'
 
 
 const AddSite = ({navigation}) => {
-  const src = require('/Volumes/Development/PassManager/src/assets/images/facebook.png');
+  const src = require('/Volumes/Development/PassManager/src/assets/images/lockApp.png');
   const dispatch = useDispatch();
   const data = useSelector(state => state.password.value);
   const [inputValue, setInputValue] = useState('');
+
+  const [secureTextEntry,setSecureTextEntry]=useState(true);
+  const [icon,setIcon]=useState('eye-with-line');
 
   const signupValidationSchema = yup.object().shape({
     url: yup.string().required('url is required'),
@@ -127,8 +130,11 @@ const AddSite = ({navigation}) => {
                       onChangeText={handleChange('password')}
                       onBlur={handleBlur('password')}
                       value={values.password}
+                      secureTextEntry={secureTextEntry}
                     />
-                    <Icon name="eye" size={20} />
+                   <Icon name={icon} size={25} onPress={()=>{
+                  setSecureTextEntry(!secureTextEntry);
+                  secureTextEntry ? setIcon("eye-with-line"):setIcon("eye")}} />
                   </View>
                 </View>
 

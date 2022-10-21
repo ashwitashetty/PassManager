@@ -10,30 +10,29 @@ const ListView = ({navigation}) => {
       <FlatList
         data={value}
         renderItem={({item}) => (
-          <Pressable
-            style={styles.flatList}
-            onPress={() => navigation.navigate('Site Details', {item})}>
-            <View style={styles.imageName}>
-              <Image source={item.src} style={styles.image} />
+          <View>
+            <Pressable
+              onPress={() => navigation.navigate('Site Details', {item})}>
+              <View style={styles.itemContainer}>
+                <View>
+                  <View style={styles.topItem}>
+                    <Image source={item.src} style={styles.image} />
+                    <View>
+                      <Text style={styles.socialText}>{item.sitename}</Text>
+                      <View style={styles.copyContent}>
+                        <Icon name="content-copy" size={16} color="#0E85FF" />
+                        <Text style={styles.copyText}> Copy Password</Text>
+                      </View>
+                    </View>
+                  </View>
 
-
-              <View style={styles.component}>
-                <Text style={styles.componentName}>{item.sitename}</Text>
-                <View style={styles.copySection}>
-                  <Icon
-                    name="content-copy"
-                    size={18}
-                    color="#0E85FF"
-                    style={styles.icon}
-                  />
-                  <Text style={styles.componentCopy}> Copy Password</Text>
+                  <View style={styles.bottomItem}>
+                    <Text style={styles.link}>{item.url}</Text>
+                  </View>
                 </View>
               </View>
-            </View>
-            <View style={styles.viewUri}>
-              <Text style={styles.textUri}>{item.url}</Text>
-            </View>
-          </Pressable>
+            </Pressable>
+          </View>
         )}
       />
     </View>
@@ -43,56 +42,71 @@ const ListView = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FAFAFA',
+    marginTop: 2,
   },
-  flatList: {
-    marginHorizontal: 15,
-    marginVertical: 10,
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
+  itemContainer: {
     backgroundColor: '#FFFFFF',
-    shadowOffset: {width: 1, height: 2},
-    shadowOpacity: 0.2,
+    borderRadius: 5,
+    height: 115,
+    width: 365,
+    marginStart: 12,
+
+    shadowColor: 'grey',
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
     shadowRadius: 3,
-    borderRadius: 12.6,
+    shadowOpacity: 0.4,
+    padding: 10,
+    elevation: 5,
+    margin: 10,
   },
-  component: {
-    paddingRight:30,
-  },
-  componentName: {
-    height: 24,
-    width: 83,
-    color: '#0E95FF',
-    fontSize: 17,
-    paddingTop:5,
-    fontWeight: '500',
-  },
-  componentCopy: {
-    color: '#0E85FF',
-    fontSize: 11.34,
-    marginTop: 9,
-  },
-  imageName: {
+  topItem: {
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    height: 65.7,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 5,
-  },
-  viewUri: {
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: 15,
+  },
+  bottomItem: {
+    alignItems: 'center',
+    paddingTop: 10,
     backgroundColor: '#FAFAFA',
+    width: 363,
+    marginStart: -10,
   },
-  textUri: {
-    letterSpacing: 0.5,
+  socialText: {
+    color: '#0E85FF',
+    fontSize: 18,
+    fontWeight: 60,
+    lineHeight: 24,
+    fontWeight: 'bold',
+    alignSelf: 'flex-end',
+    paddingVertical: 4,
   },
-  image: {
-    marginLeft: 20,
-    marginTop: 10,
+  copyText: {
+    color: '#0E85FF',
+    fontSize: 11.34,
+    alignSelf: 'flex-end',
+    paddingVertical: 4,
   },
-  copySection: {
+  copyContent: {
     flexDirection: 'row',
+    paddingTop: 5,
+    justifyContent: 'flex-end',
+    marginEnd: -13,
   },
-  icon: {
-    paddingTop: 6,
+  link: {
+    color: '#3C4857',
+    fontSize: 14.4,
+    paddingBottom: 10,
   },
 });
 
