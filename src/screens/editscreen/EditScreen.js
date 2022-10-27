@@ -157,7 +157,6 @@ const styles = StyleSheet.create({
   container2: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    // alignItems: 'center',
     padding: 10,
   },
   container3: {
@@ -191,11 +190,9 @@ const styles = StyleSheet.create({
   },
   inputText: {
     height: 41,
-    width: '92%',
-    lineHeight: 24,
-    backgroundColor: '#FSF7FB',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: '94%',
+
+
   },
   noteBox: {
     height: 81,
@@ -232,7 +229,6 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#0E85FF',
     justifyContent: 'center',
-    // alignItems: 'center',
     marginTop: 10,
   },
 });

@@ -13,10 +13,17 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useSelector, useDispatch} from 'react-redux';
 import {deleteSite} from '../redux/ManagerSlice';
 
+import Clipboard from '@react-native-clipboard/clipboard';
+
 const ListView = ({navigation}) => {
   const value = useSelector(state => state.password.value);
   const dispatch = useDispatch();
+  
 
+  const handleCopy=(copy)=>{
+    Clipboard.setString(copy)
+
+  }
   return (
     <View>
       <FlatList
@@ -44,10 +51,11 @@ const ListView = ({navigation}) => {
                     <Image source={item.src} style={styles.image} />
                     <View>
                       <Text style={styles.socialText}>{item.sitename}</Text>
-                      <View style={styles.copyContent}>
+
+                      <TouchableOpacity style={styles.copyContent} onPress={()=>handleCopy(item.password)}>
                         <Icon name="content-copy" size={16} color="#0E85FF" />
                         <Text style={styles.copyText}> Copy Password</Text>
-                      </View>
+                      </TouchableOpacity>
                     </View>
                   </View>
 

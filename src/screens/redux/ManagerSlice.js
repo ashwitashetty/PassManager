@@ -72,6 +72,7 @@ export const ManagerSlice = createSlice({
     },
     deleteSite :(state,action) => {
       state.value = state.value.filter(value => value.id !== action.payload.id);
+      state.filterValue=state.value
     },
     filterDropDown: (state, action) => {
       if(action.payload == 'All'){
