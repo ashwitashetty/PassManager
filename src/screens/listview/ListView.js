@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderRadius: 5,
     height: 115,
-    width: "100%",
-    // marginStart: 12,
+    width: "96%",
+    marginHorizontal:10,
     shadowColor: 'grey',
     shadowOffset: {
       width: 1,
@@ -87,7 +87,6 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 3,
     shadowOpacity: 0.5,
-    padding: 10,
     elevation: 5,
     margin: 10,
   },
@@ -102,9 +101,9 @@ const styles = StyleSheet.create({
   bottomItem: {
     alignItems: 'center',
     paddingTop: 10,
+    paddingBottom:11,
     backgroundColor: '#FAFAFA',
-    // width: 363,
-    marginStart: -10,
+    width: "100%",
   },
   socialText: {
     color: '#0E85FF',

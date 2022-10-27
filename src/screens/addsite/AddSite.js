@@ -12,13 +12,13 @@ import Toast from 'react-native-simple-toast';
 import Icon from 'react-native-vector-icons/Entypo';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useDispatch,useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import CustomButton from '../../component/CustomButton';
 import {add} from '../redux/ManagerSlice';
 import {Formik} from 'formik';
-import * as yup from 'yup'
-
+import * as yup from 'yup';
+import DropdownField from '../../component/DropdownField';
 
 const AddSite = ({navigation}) => {
   const src = require('/Volumes/Development/PassManager/src/assets/images/lockApp.png');
@@ -26,13 +26,19 @@ const AddSite = ({navigation}) => {
   const data = useSelector(state => state.password.value);
   const [inputValue, setInputValue] = useState('');
 
-  const [secureTextEntry,setSecureTextEntry]=useState(true);
-  const [icon,setIcon]=useState('eye-with-line');
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
+  const [icon, setIcon] = useState('eye-with-line');
+
+  const [selected, setSelected] = useState(' ');
+  const dropdownData = [
+    {key: 'Social Media', value: 'Social Media'},
+    {key: 'Shopping Sites', value: 'Shopping Sites'},
+ 
+  ];
 
   const signupValidationSchema = yup.object().shape({
     url: yup.string().required('url is required'),
     sitename: yup.string().required('sitename is required'),
-    folder: yup.string().required('folder is required'),
     username: yup.string().required('username is required'),
     password: yup.string().required('password is required'),
     notes: yup.string().required(),
@@ -41,7 +47,7 @@ const AddSite = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <Formik
-       validationSchema={signupValidationSchema}
+        validationSchema={signupValidationSchema}
         initialValues={{
           url: '',
           sitename: '',
@@ -52,16 +58,16 @@ const AddSite = ({navigation}) => {
           src: src,
         }}
         onSubmit={async values => {
-          const obj ={
+          const obj = {
             id: data.length + 1,
             url: values.url,
             sitename: values.sitename,
-            folder: values.folder,
+            folder: selected,
             username: values.username,
             password: values.password,
             notes: values.notes,
-            src:src,
-          }
+            src: src,
+          };
           dispatch(add(obj));
           console.log(values);
           try {
@@ -71,10 +77,10 @@ const AddSite = ({navigation}) => {
             console.log(err);
           }
         }}>
-        {({handleChange, handleBlur, handleSubmit, values,handleReset}) => (
+        {({handleChange, handleBlur, handleSubmit, values, handleReset}) => (
           <>
             <ScrollView>
-              <View >
+              <View>
                 <View>
                   <Text style={styles.text}>URL</Text>
                   <TextInput
@@ -93,24 +99,15 @@ const AddSite = ({navigation}) => {
                     value={values.sitename}
                   />
                 </View>
-
-                <View style={styles.password}>
-                  <Text style={styles.text}>Sector/Folder</Text>
-                  <View style={styles.rectangle}>
-                    <TextInput
-                      style={styles.inputText}
-                      onChangeText={handleChange('folder')}
-                      onBlur={handleBlur('folder')}
-                      value={values.folder}
-                    />
-                    <Icon
-                      name="chevron-down"
-                      size={20}
-                      color="#0E85FF"
-                      style={{alignItems: 'flex-end'}}
-                    />
-                  </View>
-                </View>
+                <DropdownField
+                  text="folder"
+                  name="folder"
+                  onChangeText={handleChange('folder')}
+                  onBlur={handleBlur('folder')}
+                  data={dropdownData}
+                  value={selected}
+                  setSelected={setSelected}
+                />
 
                 <View>
                   <Text style={styles.text}>User Name</Text>
@@ -132,9 +129,16 @@ const AddSite = ({navigation}) => {
                       value={values.password}
                       secureTextEntry={secureTextEntry}
                     />
-                   <Icon name={icon} size={25} onPress={()=>{
-                  setSecureTextEntry(!secureTextEntry);
-                  secureTextEntry ? setIcon("eye-with-line"):setIcon("eye")}} />
+                    <Icon
+                      name={icon}
+                      size={25}
+                      onPress={() => {
+                        setSecureTextEntry(!secureTextEntry);
+                        secureTextEntry
+                          ? setIcon('eye-with-line')
+                          : setIcon('eye');
+                      }}
+                    />
                   </View>
                 </View>
 
@@ -149,10 +153,10 @@ const AddSite = ({navigation}) => {
                   />
                 </View>
               </View>
-            <View style={styles.button}>
-              <CustomButton title={'Reset'} onPress={handleReset}/>
-              <CustomButton title={'Save'} onPress={handleSubmit} />
-            </View>
+              <View style={styles.button}>
+                <CustomButton title={'Reset'} onPress={handleReset} />
+                <CustomButton title={'Save'} onPress={handleSubmit} />
+              </View>
             </ScrollView>
           </>
         )}
@@ -166,11 +170,12 @@ export default AddSite;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    margin: 15,
   },
-  
+
   rectangle: {
     height: 41,
-    width: "100%",
+    width: '100%',
     borderColor: '#D7D7D7',
     borderWidth: 1,
     borderRadius: 4,
@@ -181,7 +186,7 @@ const styles = StyleSheet.create({
   },
   text: {
     height: 24,
-    width: "100%",
+    width: '100%',
     color: '#949CA5',
     fontSize: 18,
     letterSpacing: 0,
@@ -191,7 +196,7 @@ const styles = StyleSheet.create({
   },
   rectangle1: {
     height: 61,
-    width: "100%",
+    width: '100%',
     borderColor: '#D7D7D7',
     borderWidth: 1,
     borderRadius: 4,
@@ -199,11 +204,9 @@ const styles = StyleSheet.create({
   },
   button: {
     flexDirection: 'row',
-    // justifyContent:"space-around"
-    
   },
   inputText: {
     height: 41,
-    width: "92.9%",
+    width: '92.9%',
   },
 });

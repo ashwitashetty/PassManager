@@ -31,7 +31,7 @@ const EditScreen = ({navigation}) => {
   const dropdownData = [
     {key: 'Social Media', value: 'Social Media'},
     {key: 'Shopping Sites', value: 'Shopping Sites'},
-    {key: 'bank', value: 'bank'},
+   
   ];
 
   return (
@@ -50,7 +50,7 @@ const EditScreen = ({navigation}) => {
             id: siteid,
             url: values.url,
             sitename: values.sitename,
-            folder: values.folder,
+            folder:selected,
             username: values.username,
             password: values.password,
             notes: values.notes,

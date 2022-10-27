@@ -4,7 +4,7 @@ import SelectList from 'react-native-dropdown-select-list';
 
 const DropdownField = props => {
   return (
-    <View style={{margin: 5}}>
+    <View style={{margin:5}}>
       <Text style={styles.text}>Select/Folder</Text>
       <SelectList
         text={props.text}
@@ -16,10 +16,10 @@ const DropdownField = props => {
         setSelected={props.setSelected}
         placeholder="Select Type"
         boxStyles={{
-          height: 55,
+          height: 41,
           width: '100%',
           alignItems: 'center',
-          paddingHorizontal: 20,
+          paddingHorizontal: 15,
           alignSelf: 'center',
           backgroundColor: '#F5F7FB',
           borderWidth: 0.5,

@@ -11,17 +11,49 @@ import {
 
 import Icon from 'react-native-vector-icons/Entypo';
 import ListView from '../listview/ListView';
-import SearchField from "../../component/SearchField"
+import SearchField from '../../component/SearchField';
+import {DataSyncField} from '../../component/DataSyncField';
 
-
-import { filter } from '../redux/ManagerSlice';
-import { useDispatch } from 'react-redux';
-
+import {filter, filterDropDown} from '../redux/ManagerSlice';
+import {useDispatch, useSelector} from 'react-redux';
 
 const PassManager = ({navigation}) => {
   const [clicked, setClicked] = useState(false);
 
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
+
+  const [visible, setVisible] = useState(false);
+  const [item, setItem] = useState('All');
+
+  const data = useSelector(state => state.password.value);
+  const sitesFolder = ['All', 'Social Media', 'Shopping Sites'];
+
+  const setDropdown = () => {
+    setVisible(!visible);
+  };
+
+  const handleFolders = folder => {
+    setItem(folder);
+    dispatch(filterDropDown(folder));
+    setVisible(false);
+  };
+  const renderDropdown = () => {
+    if (visible) {
+      return (
+        <View style={styles.dropdownContainer}>
+          {sitesFolder.map(folder => (
+            <TouchableOpacity
+              onPress={() => {
+                handleFolders(folder);
+              }}
+              key={folder}>
+              <Text style={styles.dropdownText}>{folder}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      );
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -47,12 +79,7 @@ const PassManager = ({navigation}) => {
               style={styles.contentIcon}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              source={require('/Volumes/Development/PassManager/src/assets/images/sync_icn.png')}
-              style={styles.contentIcon}
-            />
-          </TouchableOpacity>
+          <DataSyncField />
           <Image
             source={require('/Volumes/Development/PassManager/src/assets/images/profile.png')}
             style={styles.contentIcon}
@@ -71,14 +98,19 @@ const PassManager = ({navigation}) => {
             </View>
 
             <View style={styles.headerMenu}>
-              <Text style={styles.socialMedia}>Social Media</Text>
+              <Text style={styles.socialMedia}>{item}</Text>
               <View style={styles.oval}>
-                <Text style={styles.number}>07</Text>
+                <Text style={styles.number}>0{data.length}</Text>
               </View>
-              <Icon name="chevron-down" size={20} color="#0E85FF" />
+              <TouchableOpacity onPress={setDropdown}>
+                <Icon name="chevron-down" size={20} color="#0E85FF" />
+              </TouchableOpacity>
             </View>
           </>
         )}
+      </View>
+      <View style={{alignItems: 'flex-end', marginRight: '5%'}}>
+        {renderDropdown()}
       </View>
       <View style={styles.listView}>
         <ListView navigation={navigation} />
@@ -115,12 +147,12 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 5,
     shadowOpacity: 2,
-    // elevation:5,
     padding: 10,
   },
   headerMenu: {
     alignItems: 'center',
     flexDirection: 'row',
+    justifyContent: 'space-around',
   },
   content: {
     marginLeft: 25,
@@ -149,7 +181,6 @@ const styles = StyleSheet.create({
   },
   socialMedia: {
     height: 27,
-    width: 113,
     color: '#3C4857',
     fontSize: 19.2,
     letterSpacing: 0,
@@ -158,7 +189,7 @@ const styles = StyleSheet.create({
   number: {
     color: '#FFFFFF',
     height: 22,
-    width: 19,
+    width: 22,
     fontSize: 16,
     fontWeight: '600',
     letterSpacing: 0,
@@ -175,11 +206,7 @@ const styles = StyleSheet.create({
   },
   listView: {
     flex: 1,
-    // marginLeft:-40,
-    // marginBottom:30,
-    // borderWidth:1,
-    // margin:10
-    marginHorizontal:20
+    marginHorizontal: 20,
   },
   button: {
     position: 'absolute',
@@ -203,6 +230,18 @@ const styles = StyleSheet.create({
     borderRadius: 1.6,
     marginLeft: 1,
     marginVertical: -3,
+  },
+  dropdownContainer: {
+    marginVertical: 5,
+    alignSelf: 'flex-end',
+    marginEnd: 5,
+    borderRadius: 5,
+    borderWidth: 0.28,
+    borderColor: '#0E85FF',
+    backgroundColor: '#FFFFFF',
+  },
+  dropdownText: {
+    padding: 5,
   },
 });
 

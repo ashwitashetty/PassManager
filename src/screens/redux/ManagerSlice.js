@@ -72,10 +72,20 @@ export const ManagerSlice = createSlice({
     },
     deleteSite :(state,action) => {
       state.value = state.value.filter(value => value.id !== action.payload.id);
+    },
+    filterDropDown: (state, action) => {
+      if(action.payload == 'All'){
+        state.value= state.filterValue
+      }else{
+        state.value = state.filterValue.filter(site =>
+          site.folder.toLowerCase().includes(action.payload.toLowerCase()),
+        );
+      }
+
     }
   },
 });
 
-export const {add, edit, filter,deleteSite} = ManagerSlice.actions;
+export const {add, edit, filter,deleteSite,filterDropDown} = ManagerSlice.actions;
 
 export default ManagerSlice.reducer;
