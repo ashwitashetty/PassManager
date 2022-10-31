@@ -111,7 +111,7 @@ const [icon,setIcon]=useState('eye');
               style={styles.fingerPrintIcon}
             />
             <View style={styles.textBottom}>
-              <Text style={styles.textBottom1}>OK</Text>
+              <Text style={styles.textBottom1}>OR</Text>
               <Text style={styles.textBottom2}>
                 {' '}
                 USE YOUR FINGERPRINT TO LOGIN

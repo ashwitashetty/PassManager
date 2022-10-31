@@ -131,6 +131,7 @@ const PassManager = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:"#FAFAFA"
   },
   header: {
     width: '100%',
@@ -229,7 +230,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#FFA136',
     borderRadius: 1.6,
     marginLeft: 1,
-    marginVertical: -3,
+    marginVertical: -1,
   },
   dropdownContainer: {
     marginVertical: 5,

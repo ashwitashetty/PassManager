@@ -49,14 +49,17 @@ const ListView = ({navigation}) => {
                 <View>
                   <View style={styles.topItem}>
                     <Image source={item.src} style={styles.image} />
-                    <View>
-                      <Text style={styles.socialText}>{item.sitename}</Text>
+
+
+                    <View style={styles.component}>
+                      <Text style={styles.siteText}>{item.sitename}</Text>
 
                       <TouchableOpacity style={styles.copyContent} onPress={()=>handleCopy(item.password)}>
                         <Icon name="content-copy" size={16} color="#0E85FF" />
                         <Text style={styles.copyText}> Copy Password</Text>
                       </TouchableOpacity>
                     </View>
+
                   </View>
 
                   <View style={styles.bottomItem}>
@@ -84,8 +87,8 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     backgroundColor: '#FFFFFF',
-    borderRadius: 5,
-    height: 115,
+    borderRadius: 12,
+    // height: 115,
     width: "96%",
     marginHorizontal:10,
     shadowColor: 'grey',
@@ -97,28 +100,37 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     elevation: 5,
     margin: 10,
+  
   },
   topItem: {
-    paddingHorizontal: 20,
-    paddingVertical: 5,
-    height: 65.7,
+   
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    margin:10,
+    paddingVertical:5,
+
   },
   bottomItem: {
     alignItems: 'center',
+    justifyContent:"center",
     paddingTop: 10,
-    paddingBottom:11,
+    paddingBottom:10,
     backgroundColor: '#FAFAFA',
     width: "100%",
+    borderBottomRightRadius:12,
+    borderBottomLeftRadius:12,
   },
-  socialText: {
+  component:{
+    justifyContent:"flex-end",
+    flex:1
+
+  },
+  siteText: {
     color: '#0E85FF',
     fontSize: 18,
-    fontWeight: 60,
     lineHeight: 24,
-    fontWeight: 'bold',
+    fontWeight: '500',
     alignSelf: 'flex-end',
     paddingVertical: 4,
   },
@@ -126,19 +138,22 @@ const styles = StyleSheet.create({
     color: '#0E85FF',
     fontSize: 11.34,
     alignSelf: 'flex-end',
-    paddingVertical: 4,
+    // paddingVertical: 4,
   },
   copyContent: {
     flexDirection: 'row',
     paddingTop: 5,
     justifyContent: 'flex-end',
-    marginEnd: -13,
+ 
   },
   link: {
     color: '#3C4857',
     fontSize: 14.4,
-    paddingBottom: 10,
+    letterSpacing:0.5,
+
+ 
   },
 });
 
 export default ListView;
+
