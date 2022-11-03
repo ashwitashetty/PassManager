@@ -5,17 +5,20 @@ import {
   View,
   Image,
   Pressable,
-  ToastAndroid,
   ScrollView,
 } from 'react-native';
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import PrimaryButton from '../../component/PrimaryButton';
-import Toast from "react-native-simple-toast"
+import Toast from 'react-native-simple-toast';
 import Icon from 'react-native-vector-icons/Entypo';
 
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import {useDispatch} from 'react-redux';
+import {assignUserId} from '../redux/userIdSlice';
+import {changeUserState} from '../redux/userStateSlice';
 
 const SignIn = ({navigation}) => {
   const signinValidationSchema = yup.object().shape({
@@ -30,97 +33,104 @@ const SignIn = ({navigation}) => {
       .required('mPin is required'),
   });
 
+  const dispatch = useDispatch();
 
-const [secureTextEntry,setSecureTextEntry]=useState(true);
-const [icon,setIcon]=useState('eye');
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
+  const [icon, setIcon] = useState('eye');
   return (
     <ScrollView>
-    <View style={styles.container}>
-      <Formik
-        validationSchema={signinValidationSchema}
-        initialValues={{mobileno: '', mpin: ''}}
-        onSubmit={async values => {
-          console.log(values);
-          try {
-            const jsonValue = await AsyncStorage.getItem('values.mobileno');
-            if (jsonValue != null) {
-              parseValue = JSON.parse(jsonValue);
-
-              if (
-                values.mobileno === parseValue.mobileno &&
-                values.mpin === parseValue.mpin
-              ) {
-                Toast.show("Sucessfully Logged In");
-                navigation.navigate('PassManager');
-              } else {
-                alert('Enter Correct Mobile Number and MPin');
+      <View style={styles.container}>
+        <Formik
+          validationSchema={signinValidationSchema}
+          initialValues={{mobileno: '', mpin: ''}}
+          onSubmit={async values => {
+            console.log(values);
+            try {
+              const jsonValue = await AsyncStorage.getItem(values.mobileno);
+              if (jsonValue != null) {
+                parseValue = JSON.parse(jsonValue);
+                dispatch(assignUserId(parseValue));
+                console.log(parseValue);
+                if (
+                  values.mobileno === parseValue.mobileno &&
+                  values.mpin === parseValue.mpin
+                ) {
+                  Toast.show('Sucessfully Logged In');
+                  dispatch(changeUserState());
+                } else {
+                  alert('Enter Correct Mobile Number and MPin');
+                }
               }
+            } catch (err) {
+              console.log(err);
             }
-          } catch (err) {
-            console.log(err);
-          }
-        }}>
-        {({
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          values,
-          errors,
-          isValid,
-        }) => (
-          <>
-            <TextInput
-              name="mobileno"
-              placeholder="Mobile Number"
-              placeholderTextColor={'grey'}
-              style={styles.textInput}
-              onChangeText={handleChange('mobileno')}
-              onBlur={handleBlur('mobileno')}
-              value={values.mobileno}
-              keyboardType="number-pad"
-            />
-            {errors.mobileno && (
-              <Text style={{fontSize: 10, color: 'red'}}>
-                {errors.mobileno}
-              </Text>
-            )}
-            <View style={styles.password}>
+          }}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            isValid,
+          }) => (
+            <>
               <TextInput
-                name="mpin"
-                placeholder="MPin"
-                onChangeText={handleChange('mpin')}
+                name="mobileno"
+                placeholder="Mobile Number"
                 placeholderTextColor={'grey'}
-                onBlur={handleBlur('mpin')}
-                value={values.mpin}
+                style={styles.textInput}
+                onChangeText={handleChange('mobileno')}
+                onBlur={handleBlur('mobileno')}
+                value={values.mobileno}
                 keyboardType="number-pad"
-                secureTextEntry={secureTextEntry}
               />
-               <Icon name={icon} size={25} onPress={()=>{
-                  setSecureTextEntry(!secureTextEntry);
-                  secureTextEntry ? setIcon("eye-with-line"):setIcon("eye")}} />
-            </View>
-            {errors.mpin && (
-              <Text style={{fontSize: 10, color: 'red'}}>{errors.mpin}</Text>
-            )}
-            <Pressable style={{}}>
-              <Text style={styles.forgotPassword}>Forgot your password?</Text>
-            </Pressable>
-            <PrimaryButton onPress={handleSubmit} disabled={!isValid} />
-            <Image
-              source={require('/Volumes/Development/PassManager/src/assets/images/fingerprinticon.png')}
-              style={styles.fingerPrintIcon}
-            />
-            <View style={styles.textBottom}>
-              <Text style={styles.textBottom1}>OR</Text>
-              <Text style={styles.textBottom2}>
-                {' '}
-                USE YOUR FINGERPRINT TO LOGIN
-              </Text>
-            </View>
-          </>
-        )}
-      </Formik>
-    </View>
+              {errors.mobileno && (
+                <Text style={{fontSize: 10, color: 'red'}}>
+                  {errors.mobileno}
+                </Text>
+              )}
+              <View style={styles.password}>
+                <TextInput
+                  name="mpin"
+                  placeholder="MPin"
+                  onChangeText={handleChange('mpin')}
+                  placeholderTextColor={'grey'}
+                  onBlur={handleBlur('mpin')}
+                  value={values.mpin}
+                  keyboardType="number-pad"
+                  secureTextEntry={secureTextEntry}
+                />
+                <Icon
+                  name={icon}
+                  size={25}
+                  onPress={() => {
+                    setSecureTextEntry(!secureTextEntry);
+                    secureTextEntry ? setIcon('eye-with-line') : setIcon('eye');
+                  }}
+                />
+              </View>
+              {errors.mpin && (
+                <Text style={{fontSize: 10, color: 'red'}}>{errors.mpin}</Text>
+              )}
+              <Pressable>
+                <Text style={styles.forgotPassword}>Forgot your password?</Text>
+              </Pressable>
+              <PrimaryButton onPress={handleSubmit} disabled={!isValid} />
+              <Image
+                source={require('/Volumes/Development/PassManager/src/assets/images/fingerprinticon.png')}
+                style={styles.fingerPrintIcon}
+              />
+              <View style={styles.textBottom}>
+                <Text style={styles.textBottom1}>OR</Text>
+                <Text style={styles.textBottom2}>
+                  {' '}
+                  USE YOUR FINGERPRINT TO LOGIN
+                </Text>
+              </View>
+            </>
+          )}
+        </Formik>
+      </View>
     </ScrollView>
   );
 };
@@ -134,7 +144,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 54,
-    width: "90%",
+    width: '90%',
     borderColor: 'rgba(208,208,208,0.5)',
     backgroundColor: '#FFFFFF',
     paddingHorizontal: 10,
@@ -142,7 +152,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     fontWeight: '600',
     marginBottom: 5,
-    marginHorizontal:10,
+    marginHorizontal: 10,
   },
   eyeIcon: {
     height: 15,
@@ -152,7 +162,7 @@ const styles = StyleSheet.create({
   },
   password: {
     height: 54,
-    width: "90%",
+    width: '90%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -166,14 +176,14 @@ const styles = StyleSheet.create({
   },
   forgotPassword: {
     height: 17,
-    width: "100%",
+    width: '100%',
     color: '#FFFFFF',
     fontSize: 14,
     fontWeight: '600',
     letterSpacing: 0,
     lineHeight: 17,
     marginTop: 30,
-    marginRight:"50%",
+    marginRight: '50%',
   },
   fingerPrintIcon: {
     height: 54,

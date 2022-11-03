@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {
   View,
   Text,
@@ -14,9 +14,12 @@ import {useSelector, useDispatch} from 'react-redux';
 import {deleteSite} from '../redux/ManagerSlice';
 
 import Clipboard from '@react-native-clipboard/clipboard';
+import {getUserData} from "../redux/ManagerSlice"
+
+
 
 const ListView = ({navigation}) => {
-  const value = useSelector(state => state.password.value);
+  const value = useSelector(state => state.password.value );
   const dispatch = useDispatch();
   
 
@@ -24,6 +27,11 @@ const ListView = ({navigation}) => {
     Clipboard.setString(copy)
 
   }
+  const userId = useSelector(state => state.userId.userId)
+  useEffect(() => {
+    dispatch(getUserData(userId));
+  }, []);
+
   return (
     <View>
       <FlatList

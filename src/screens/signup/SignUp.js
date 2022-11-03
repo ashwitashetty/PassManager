@@ -8,6 +8,9 @@ import {Formik, Field} from 'formik';
 import * as yup from 'yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from "react-native-simple-toast"
+import { incrementUserCount } from '../redux/userCountSlice';
+
+import { useDispatch,useSelector} from 'react-redux';
 
 const SignUp = ({navigation}) => {
   const signupValidationSchema = yup.object().shape({
@@ -26,7 +29,8 @@ const SignUp = ({navigation}) => {
       .required('Confirm mPin is required'),
   });
 
-
+  const dispatch=useDispatch();
+  const userId = useSelector(state=>state.userCount.value)
   const [secureTextEntry,setSecureTextEntry]=useState(true);
   const [icon,setIcon]=useState('eye');
 
@@ -39,9 +43,17 @@ const SignUp = ({navigation}) => {
         onSubmit={async values => {
           console.log(values);
           try {
-            const jsonValue = JSON.stringify(values);
-            await AsyncStorage.setItem('values.mobileno', jsonValue);
+            const obj={
+              mobileno:values.mobileno,
+              mpin:values.mpin,
+              userId:userId,
+            }
+            const jsonValue = JSON.stringify(obj);
+            console.log(jsonValue)
+            // const jsonValue = JSON.stringify(values);
+            await AsyncStorage.setItem(values.mobileno, jsonValue);
             Toast.show('Congrats!!! Sucess \n Signin to access the vault');
+            dispatch(incrementUserCount())
             navigation.navigate('Sign In');
           } catch (err) {
             console.log(err);

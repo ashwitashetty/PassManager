@@ -10,6 +10,7 @@ import MainScreen from '../screens/mainscreen/MainScreen';
 import AddSite from '../screens/addsite/AddSite';
 import SiteDetails from '../screens/sitedetails/SiteDetails';
 import EditScreen from '../screens/editscreen/EditScreen';
+import { useSelector } from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,15 +20,21 @@ const AuthStackNavigation = () => {
       background: 'transparent',
     },
   };
+
+  const state = useSelector(state => state.userState.userState);
   return (
     <NavigationContainer theme={theme} onReady={() => RNBootSplash.hide()}>
       <Stack.Navigator>
-        <Stack.Screen
-          name="MainScreen"
-          component={MainScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
+        {!state ? (
+          <Stack.Screen
+            name="MainScreen"
+            component={MainScreen}
+            options={{headerShown: false}}
+          />
+
+        ):(
+          <>
+          <Stack.Screen
           name="PassManager"
           component={PassManager}
           options={{headerShown: false}}
@@ -62,6 +69,9 @@ const AuthStackNavigation = () => {
           component={SiteDetails}
           options={{headerShown: false}}
         />
+        </>
+        )}
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

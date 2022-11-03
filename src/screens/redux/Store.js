@@ -3,7 +3,9 @@ import {combineReducers} from '@reduxjs/toolkit';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import persistReducer from "redux-persist/es/persistReducer";
 import ManagerSlice from "../redux/ManagerSlice";
-
+import userIdReducer from "../redux/userIdSlice"
+import userCountReducer from "./userCountSlice";
+import userStateReducer from "./userStateSlice"
 
 const persistConfig={
     key:"root",
@@ -13,7 +15,13 @@ const persistConfig={
 
 const reducer = combineReducers(
     {
-        password:ManagerSlice
+        password:ManagerSlice,
+        userId: userIdReducer,
+        userCount: userCountReducer,
+        userState : userStateReducer,
+      
+      
+      
     } 
 );
 

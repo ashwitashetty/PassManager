@@ -24,6 +24,7 @@ const AddSite = ({navigation}) => {
   const src = require('/Volumes/Development/PassManager/src/assets/images/lockApp.png');
   const dispatch = useDispatch();
   const data = useSelector(state => state.password.value);
+  
   const [inputValue, setInputValue] = useState('');
 
   const [secureTextEntry, setSecureTextEntry] = useState(true);
@@ -35,7 +36,8 @@ const AddSite = ({navigation}) => {
     {key: 'Shopping Sites', value: 'Shopping Sites'},
  
   ];
-
+  const userId = useSelector(state => state.userId.userId)
+  
   const signupValidationSchema = yup.object().shape({
     url: yup.string().required('url is required'),
     sitename: yup.string().required('sitename is required'),
@@ -56,6 +58,7 @@ const AddSite = ({navigation}) => {
           password: '',
           notes: '',
           src: src,
+          
         }}
         onSubmit={async values => {
           const obj = {
@@ -67,6 +70,7 @@ const AddSite = ({navigation}) => {
             password: values.password,
             notes: values.notes,
             src: src,
+            userId:userId
           };
           dispatch(add(obj));
           console.log(values);

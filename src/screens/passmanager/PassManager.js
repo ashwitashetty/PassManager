@@ -7,6 +7,7 @@ import {
   Image,
   StatusBar,
   TouchableOpacity,
+  Pressable,
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Entypo';
@@ -16,6 +17,7 @@ import {DataSyncField} from '../../component/DataSyncField';
 
 import {filter, filterDropDown} from '../redux/ManagerSlice';
 import {useDispatch, useSelector} from 'react-redux';
+import { changeUserState } from '../redux/userStateSlice';
 
 const PassManager = ({navigation}) => {
   const [clicked, setClicked] = useState(false);
@@ -55,6 +57,11 @@ const PassManager = ({navigation}) => {
     }
   };
 
+  
+  const handleLogout = ()=>{
+    dispatch(changeUserState())
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
@@ -80,10 +87,12 @@ const PassManager = ({navigation}) => {
             />
           </TouchableOpacity>
           <DataSyncField />
+          <TouchableOpacity onPress={handleLogout}>
           <Image
             source={require('/Volumes/Development/PassManager/src/assets/images/profile.png')}
             style={styles.contentIcon}
           />
+          </TouchableOpacity>
         </View>
       </View>
 

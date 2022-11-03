@@ -1,7 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = [
-  { id:1,
+  { 
+    userId:1,
+    id:1,
     src: require('/Volumes/Development/PassManager/src/assets/images/facebook.png'),
     url: 'wwww.facebook.com',
     sitename: 'Facebook',
@@ -11,6 +13,7 @@ const initialState = [
     notes: 'facebook password',
   },
   {
+    userId:1,
     id:2,
     src: require('/Volumes/Development/PassManager/src/assets/images/youTube.png'),
     url: 'www.youtube.com/ssmraok',
@@ -21,6 +24,7 @@ const initialState = [
     notes: ' youtube details',
   },
   {
+    userId:2,
     id:3,
     src: require('/Volumes/Development/PassManager/src/assets/images/Twitter.png'),
     url: 'wwww.Twitter.com',
@@ -31,6 +35,7 @@ const initialState = [
     notes: ' twitter account',
   },
   {
+    userId:2,
     id:4,
     src: require('/Volumes/Development/PassManager/src/assets/images/Instagram.png'),
     url: 'wwww.Instagram.com',
@@ -45,16 +50,45 @@ const initialState = [
 export const ManagerSlice = createSlice({
   name: 'password',
   initialState: {
-    value: initialState,
-    filterValue: initialState,
+    allValues:initialState,
+    value: [],
+    filterValue: [],
   },
   reducers: {
+    getUserData: (state, action) => {
+      state.value = state.allValues.filter(item => {
+        return item.userId == action.payload;
+      });
+      state.filterValue = state.value;
+    },
     add: (state, action) => {
       state.value.push(action.payload);
       state.filterValue.push(action.payload);
+      state.allValues.push(action.payload);
+      
     },
     edit: (state, action) => {
       state.value.map(password => {
+        if (password.id === action.payload.id) {
+          password.sitename = action.payload.sitename;
+          password.url = action.payload.url;
+          password.password = action.payload.password;
+          password.folder = action.payload.folder;
+          password.username = action.payload.username;
+          password.notes = action.payload.notes;
+        }
+      });
+      state.allValues.map(password => {
+        if (password.id === action.payload.id) {
+          password.sitename = action.payload.sitename;
+          password.url = action.payload.url;
+          password.password = action.payload.password;
+          password.folder = action.payload.folder;
+          password.username = action.payload.username;
+          password.notes = action.payload.notes;
+        }
+      });
+      state.filterValue.map(password => {
         if (password.id === action.payload.id) {
           password.sitename = action.payload.sitename;
           password.url = action.payload.url;
@@ -72,7 +106,9 @@ export const ManagerSlice = createSlice({
     },
     deleteSite :(state,action) => {
       state.value = state.value.filter(value => value.id !== action.payload.id);
-      state.filterValue=state.value
+      state.allValues = state.allValues.filter(value => value.id !== action.payload.id);
+      state.filterValue = state.filterValue.filter(value => value.id !== action.payload.id);
+ 
     },
     filterDropDown: (state, action) => {
       if(action.payload == 'All'){
@@ -82,11 +118,10 @@ export const ManagerSlice = createSlice({
           site.folder.toLowerCase().includes(action.payload.toLowerCase()),
         );
       }
-
     }
   },
 });
 
-export const {add, edit, filter,deleteSite,filterDropDown} = ManagerSlice.actions;
+export const {add, edit, filter,deleteSite,filterDropDown,getUserData} = ManagerSlice.actions;
 
 export default ManagerSlice.reducer;
